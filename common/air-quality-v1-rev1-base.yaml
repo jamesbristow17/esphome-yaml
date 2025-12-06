@@ -54,8 +54,8 @@ output:
     id: hold
 
   - platform: ledc
-    pin: GPI09
     id: buzzer
+    pin: GPIO9
       
 binary_sensor:
   - platform: gpio
