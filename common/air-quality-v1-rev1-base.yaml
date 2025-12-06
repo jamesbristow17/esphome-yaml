@@ -41,6 +41,14 @@ spi:
   clk_pin: GPIO5
   mosi_pin: GPIO6
 
+switch:
+  - platform: template
+    name: "Buzzer Switch"
+    id: buzzer_switch # <-- New ID we will use for display
+    turn_on_action:
+      - output.turn_on: buzzer # Links to the LEDC output
+    turn_off_action:
+      - output.turn_off: buzzer # Links to the LEDC output
 
 output:
   - platform: gpio
@@ -258,6 +266,6 @@ display:
           it.printf(10, 65, id(extra_icon), "%s", id(airq_api).is_connected() ? "\U000F109B" : "\U000F109B");
           it.printf(40, 65, id(montserrat), "%s", id(airq_api).is_connected() ? "Connected" : "Not connected");
           it.print(10, 95, id(extra_icon), "\U000F00E6");
-          it.printf(40, 95, id(montserrat), "%s", id(buzzer).is_on() ? "ON" : "OFF");
+          it.printf(40, 95, id(montserrat), "%s", id(buzzer_switch).state ? "ON" : "OFF");
           it.print(8, 128, id(extra_icon), "\U000F0079");
           it.printf(40, 128, id(montserrat), "%.2f V", id(battery).state);
